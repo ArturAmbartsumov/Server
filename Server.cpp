@@ -43,14 +43,12 @@ void Server::run_server() {
 
     while(true) {
         int client = accept(mainSocket, NULL, NULL);
-        std::cout << "Ошибка: accept1" << std::endl;
         if (client == -1) {
             std::unique_lock<std::mutex> locker(cout_lock);
             std::cout << "Ошибка: accept" << std::endl;
             break;
         }
         Worker* worker = getNextWorker();
-        std::cout << "Ошибка: accept1" << std::endl;
         worker->addClient(client);
     }
 }

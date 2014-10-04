@@ -9,12 +9,11 @@ void HttpHandler::setRootDir(std::string path) {
 }
 
 void HttpHandler::exec(int clientSocket) {
-    std::cout << "exec" << std::endl;
     currentClient = clientSocket;
     std::string data = readDataFromSocket(currentClient);
     HttpRequest request = buildRequest(data);
     HttpResponse response = buildResponse(request);
-    sendDataToSocket(response, request.URL);
+    sendDataToSocket(response, request, request.URL);
     close(clientSocket);
     currentClient = 0;
 }
@@ -60,9 +59,9 @@ HttpResponse HttpHandler::buildResponse(HttpRequest &request) {
     return r;
 }
 
-void HttpHandler::sendDataToSocket(HttpResponse &response, std::string filePath) {
+void HttpHandler::sendDataToSocket(HttpResponse &response, HttpRequest &request, std::string filePath) {
     sendHeaders(response);
-    if (response.STATUS_CODE == "200 OK") {
+    if (response.STATUS_CODE == "200 OK" && request.METHOD == "GET") {
         sendFile(response, filePath);
     }
     close(currentClient);

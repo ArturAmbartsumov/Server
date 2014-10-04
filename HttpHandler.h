@@ -28,7 +28,7 @@ private:
     std::string readDataFromSocket(int client);
     HttpRequest buildRequest(std::string data);
     HttpResponse buildResponse(HttpRequest &request);
-    void sendDataToSocket(HttpResponse &response, std::string filePath);
+    void sendDataToSocket(HttpResponse &response, HttpRequest &request, std::string filePath);
     void sendHeaders(HttpResponse &response);
     void sendFile(HttpResponse &response, std::string filePath);
     std::string getDate();
