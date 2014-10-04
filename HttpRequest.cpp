@@ -35,6 +35,7 @@ void HttpRequest::urlParser() {
     while(temp[i] != '\0') {
         if(temp[i] != '%') {
             URL += temp[i];
+            i++;
             continue;
         }
         hex += URL[++i];

@@ -23,6 +23,7 @@ std::string FileSystem::resolvePath(std::string &path) {
         setFileType(path);
         return "OK";
     }
+    return "Strenge";
 }
 
 unsigned int FileSystem::getFileLength() {
